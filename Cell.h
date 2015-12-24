@@ -5,6 +5,8 @@
 #ifndef RUBIC_SOLVER_CELL_H
 #define RUBIC_SOLVER_CELL_H
 
+#include <assert.h>
+
 enum CellColor
 {
     UNKNOWN = -1,
@@ -18,7 +20,8 @@ enum CellColor
 
 class CellPosition
 {
-private:
+public:
+    CellPosition():row(0),column(0){};
     int row;
     int column;
 };
@@ -32,6 +35,7 @@ private:
 class Cell
 {
 public:
+    Cell(const int & row, const int & column, const CellColor & color);
     void setPosition(const CellPosition &position) {
         Cell::position = position;
     }
@@ -45,6 +49,12 @@ public:
 
     const CellColor &getColor() const {
         return color;
+    }
+
+    bool isCenter() const {
+        assert(position.column != 0);
+        assert(position.row != 0);
+        return position.row == position.column;
     }
 
 private:
