@@ -16,13 +16,6 @@ enum CellColor
     RED
 };
 
-enum PieceType
-{
-    CENTER,
-    EDGE,
-    CORNER,
-};
-
 enum CubeFace
 {
     FRONT,
