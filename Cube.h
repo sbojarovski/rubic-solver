@@ -5,20 +5,12 @@
 #ifndef RUBIC_SOLVER_CUBE_H
 #define RUBIC_SOLVER_CUBE_H
 
-enum CellColor
-{
-    UNKNOWN = -1,
-    WHITE,
-    YELLOW,
-    BLUE,
-    GREEN,
-    ORANGE,
-    RED
-};
+#include <vector>
+#include "CubeFace.h"
 
 enum CubeFacePosition
 {
-    FRONT,
+    FRONT = 1,
     BACK,
     LEFT,
     RIGHT,
@@ -26,25 +18,20 @@ enum CubeFacePosition
     BOTTOM
 };
 
-class CellPosition
+enum CubeTransforms
 {
-private:
-    CubeFacePosition face;
-    int row;
-    int column;
-};
-
-//
-// A cell is one face of a piece.
-// In the world, cells are of fixed color and they belong to one unique piece.
-// Then the pieces move around, and the cells and colors with them.
-// Here, I consider a cell to have a fixed position and a floating color.
-//
-class Cell
-{
-private:
-    CellColor color;
-    CellPosition position;
+    FRONT_CW = 1,
+    FRONT_CCW,
+    BACK_CW,
+    BACK_CCW,
+    LEFT_CW,
+    LEFT_CCW,
+    RIGHT_CW,
+    RIGHT_CCW,
+    TOP_CW,
+    TOP_CCW,
+    BOTTOM_CW,
+    BOTTOM_CCW
 };
 
 //
@@ -61,8 +48,14 @@ private:
     CubeFace right;
     CubeFace top;
     CubeFace bottom;
+    bool solved;
+    bool valid;
 public:
-    bool isSolved();
+    void Cube();
+    void transform(const CubeTransforms & transform);
+    // 9 cells of each color, center pieces all different etc.
+    bool isValid() const;
+    bool isSolved() const { return  solved;};
     void scramble();
     void solve();
 };
