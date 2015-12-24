@@ -5,6 +5,6 @@ find_package( OpenCV REQUIRED )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp Cube.cpp CubeFace.cpp Cell.cpp)
 add_executable(rubic-solver ${SOURCE_FILES})
 target_link_libraries( rubic-solver ${OpenCV_LIBS} )
