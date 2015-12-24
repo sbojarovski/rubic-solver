@@ -8,16 +8,6 @@
 #include <vector>
 #include "CubeFace.h"
 
-enum CubeFacePosition
-{
-    FRONT = 1,
-    BACK,
-    LEFT,
-    RIGHT,
-    TOP,
-    BOTTOM
-};
-
 enum CubeTransforms
 {
     FRONT_CW = 1,
