@@ -16,7 +16,7 @@ enum CellColor
     RED
 };
 
-enum CubeFace
+enum CubeFacePosition
 {
     FRONT,
     BACK,
@@ -29,7 +29,7 @@ enum CubeFace
 class CellPosition
 {
 private:
-    CubeFace face;
+    CubeFacePosition face;
     int row;
     int column;
 };
@@ -54,11 +54,17 @@ private:
 //
 class Cube
 {
+private:
+    CubeFace front;
+    CubeFace back;
+    CubeFace left;
+    CubeFace right;
+    CubeFace top;
+    CubeFace bottom;
 public:
     bool isSolved();
     void scramble();
     void solve();
-
 };
 
 
