@@ -40,14 +40,20 @@ private:
     CubeFace bottom;
     bool solved;
     bool valid;
+    std::vector<CubeFace &> faces;
 public:
     void Cube();
     void transform(const CubeTransforms & transform);
     // 9 cells of each color, center pieces all different etc.
     bool isValid() const;
-    bool isSolved() const { return  solved;};
+
+    bool isSolved() const;;
     void scramble();
     void solve();
+
+    bool areCenterCellsCorrect() const;
+
+    bool areNinePerColor() const;
 };
 
 
