@@ -55,3 +55,27 @@ bool Cube::CubeFace::isCenterCorrect() const {
 const std::vector<Cell &> &Cube::CubeFace::getCells() const {
     return cells;
 }
+
+void Cube::CubeFace::rotateCW() {
+
+}
+
+void Cube::CubeFace::rotateCCW() {
+
+}
+
+std::vector<Cell &> &Cube::CubeFace::getColumn(const int &i) const {
+    return <#initializer#>;
+}
+
+void Cube::CubeFace::setColumn(const int &i, std::vector<Cell &> &column) {
+
+}
+
+std::vector<Cell &> &Cube::CubeFace::getRow(const int &i) const {
+    return <#initializer#>;
+}
+
+void Cube::CubeFace::setRow(const int &i, std::vector<Cell &> &row) {
+
+}
