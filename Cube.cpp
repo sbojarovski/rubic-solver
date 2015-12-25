@@ -20,12 +20,12 @@ Cube::Cube() :
     // so that I can iterate them functional programming style, but I also
     // want to have distinctive names for them for the transformations
 
-    faces.push_back(front);
-    faces.push_back(back);
-    faces.push_back(left);
-    faces.push_back(right);
-    faces.push_back(top);
-    faces.push_back(bottom);
+    faces.push_back(&front);
+    faces.push_back(&back);
+    faces.push_back(&left);
+    faces.push_back(&right);
+    faces.push_back(&top);
+    faces.push_back(&bottom);
     rotationsMap[ FRONT_CW  ] = &frontCW;
     rotationsMap[ FRONT_CCW ] = &frontCCW;
     rotationsMap[ BACK_CW   ] = &backCW;
@@ -65,7 +65,7 @@ bool Cube::isSolved() const {
     //map
     std::transform(faces.begin(), faces.end(),
                    std::back_inserter(isFaceSolved),
-                    [](const CubeFace & f){return f.isSolved();});
+                    [](const CubeFace * f){return f->isSolved();});
     bool allFacesSolved = false;
     //reduce
     allFacesSolved = std::accumulate(isFaceSolved.begin(), isFaceSolved.end(),
@@ -79,7 +79,7 @@ bool Cube::areCenterCellsCorrect() const {
     // map: are all the center cells the valid color
     std::transform(faces.begin(), faces.end(),
                    std::back_inserter(areCentersCorrect),
-                   [](const CubeFace & f){return f.isCenterCorrect();});
+                   [](const CubeFace * f){return f->isCenterCorrect();});
     bool centersCorrect = false;
     //reduce
     centersCorrect = std::accumulate(areCentersCorrect.begin(), areCentersCorrect.end(),
@@ -92,9 +92,9 @@ bool Cube::areNinePerColor() const {
     std::vector<int> colorHistogram(6);
     for (auto&& f : faces)
     {
-        for (auto&& c : f.getCells())
+        for (auto&& c : f->getCells())
         {
-            colorHistogram[c.getColor()]++;
+            colorHistogram[c->getColor()]++;
         }
     }
     // as long as the adjacent elements are the same

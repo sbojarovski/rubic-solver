@@ -11,10 +11,12 @@
 
 class Cube::CubeFace
 {
+public:
+    typedef std::vector<Cell *> CellVector;
 private:
     class Cell;
 
-    std::vector<Cell &> cells;
+    CellVector cells;
     Cell::CellColor centerColor;
     Cell c11;
     Cell c12;
@@ -31,13 +33,13 @@ public:
     void fill(const Cell::CellColor & color);
     void rotateCW();
     void rotateCCW();
-    std::vector<Cell &> & getColumn(const int & i) const;
-    void setColumn(const int & i, std::vector<Cell &> & column);
-    std::vector<Cell &> & getRow(const int & i) const;
-    void setRow(const int & i, std::vector<Cell &> & row);
+    const CellVector & getColumn(const int & i) const;
+    void setColumn(const int & i, const CellVector & column);
+    const CellVector & getRow(const int & i) const;
+    void setRow(const int & i, const CellVector & row);
     bool isSolved() const;
     bool isCenterCorrect() const;
-    const std::vector<Cell &> &getCells() const;
+    CellVector getCells() const;
 };
 
 #endif //RUBIC_SOLVER_CUBEFACE_H

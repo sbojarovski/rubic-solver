@@ -45,7 +45,7 @@ private:
     bool solved;
     bool valid;
 
-    std::vector<CubeFace &> faces;
+    std::vector<CubeFace *> faces;
 
     static std::map<CubeTransforms , transformPtr> rotationsMap;
 
