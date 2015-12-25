@@ -9,21 +9,13 @@
 
 enum CellColor
 {
-    UNKNOWN = -1,
+    UNKNOWN = 0,
     WHITE,
     YELLOW,
     BLUE,
     GREEN,
     ORANGE,
     RED
-};
-
-class CellPosition
-{
-public:
-    CellPosition():row(0),column(0){};
-    int row;
-    int column;
 };
 
 //
@@ -35,14 +27,8 @@ public:
 class Cell
 {
 public:
-    Cell(const int & row, const int & column, const CellColor & color);
-    void setPosition(const CellPosition &position) {
-        Cell::position = position;
-    }
+    Cell(const CellColor & color);
 
-    const CellPosition &getPosition() const {
-        return position;
-    }
     void setColor(const CellColor &color) {
         Cell::color = color;
     }
@@ -51,14 +37,7 @@ public:
         return color;
     }
 
-    bool isCenter() const {
-        assert(position.column != 0);
-        assert(position.row != 0);
-        return position.row == position.column;
-    }
-
 private:
-    CellPosition position;
     CellColor color;
 };
 

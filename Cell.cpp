@@ -4,9 +4,8 @@
 
 #include "Cell.h"
 
-Cell::Cell(const int &row, const int &column, const CellColor &color)
+Cell::Cell(const CellColor &color):color(CellColor::UNKNOWN)
 {
-    position.row    = row;
-    position.column = column;
+    //TODO: assert color inside enum range
     this->color = color;
 }
