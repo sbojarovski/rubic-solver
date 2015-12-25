@@ -6,6 +6,7 @@
 #define RUBIC_SOLVER_CUBE_H
 
 #include <vector>
+#include <map>
 #include "CubeFace.h"
 
 enum CubeTransforms
@@ -38,9 +39,28 @@ private:
     CubeFace right;
     CubeFace top;
     CubeFace bottom;
+
     bool solved;
     bool valid;
+
     std::vector<CubeFace &> faces;
+
+    static std::map<CubeTransforms , transformPtr> rotationsMap;
+
+    //TODO: write the transforms :)
+    void frontCW();
+    void frontCCW();
+    void backCW();
+    void backCCW();
+    void leftCW();
+    void leftCCW();
+    void rightCW();
+    void rightCCW();
+    void topCW();
+    void topCCW();
+    void bottomCW();
+    void bottomCCW();
+
 public:
     void Cube();
     void transform(const CubeTransforms & transform);
@@ -52,8 +72,9 @@ public:
     void solve();
 
     bool areCenterCellsCorrect() const;
-
     bool areNinePerColor() const;
+
+    typedef void(*transformPtr)();
 };
 
 
