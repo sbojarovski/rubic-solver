@@ -8,14 +8,14 @@
 #include "Cell.h"
 
 Cube::Cube() :
-        solved(true),
-        valid(true),
-        front(CellColor::WHITE),
-        back(CellColor::YELLOW),
-        left(CellColor::GREEN),
-        right(CellColor::BLUE),
-        top(CellColor::ORANGE),
-        bottom(CellColor::RED)
+        solved  (true),
+        valid   (true),
+        front   (CellColor::WHITE),
+        back    (CellColor::YELLOW),
+        left    (CellColor::GREEN),
+        right   (CellColor::BLUE),
+        top     (CellColor::ORANGE),
+        bottom  (CellColor::RED)
 {
     // TODO: this is a bit ugly, I want to have a container for the faces
     // so that I can iterate them functional programming style, but I also
@@ -29,7 +29,7 @@ Cube::Cube() :
 }
 
 void Cube::transform(const CubeTransforms &transform) {
-
+    //TODO: write the transforms :)
 }
 
 bool Cube::isValid() const {
