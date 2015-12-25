@@ -58,11 +58,21 @@ Cube::CubeFace::getCells() const {
 }
 
 void Cube::CubeFace::rotateCW() {
+    CellVector coll1 = getColumn(1);
 
+    setColumn(3, getRow(1));
+    setRow(3, getColumn(3));
+    setColumn(1, getRow(3));
+    setRow(1, coll1);
 }
 
 void Cube::CubeFace::rotateCCW() {
+    CellVector row1 = getRow(1);
 
+    setRow(1, getColumn(3));
+    setColumn(3, getRow(3));
+    setRow(3, getColumn(1));
+    setColumn(1, row1);
 }
 
 // if I name the rows and cols explicitly, then I have to make sure
