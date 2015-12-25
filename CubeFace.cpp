@@ -2,20 +2,18 @@
 // Created by stefan on 12/24/15.
 //
 #include <algorithm>
-#include "Cube.h"
 #include "CubeFace.h"
-#include "Cell.h"
 
-CubeFace::CubeFace(const CellColor & color)
-        :c11(1, 1, color),
-         c12(1, 2, color),
-         c13(1, 3, color),
-         c21(2, 1, color),
-         c22(2, 2, color),
-         c23(2, 3, color),
-         c31(3, 1, color),
-         c32(3, 2, color),
-         c33(3, 3, color)
+Cube::CubeFace::CubeFace(const Cell::CellColor & color)
+        :c11(color),
+         c12(color),
+         c13(color),
+         c21(color),
+         c22(color),
+         c23(color),
+         c31(color),
+         c32(color),
+         c33(color)
 {
     cells.push_back(c11);
     cells.push_back(c12);
@@ -29,12 +27,12 @@ CubeFace::CubeFace(const CellColor & color)
     centerColor = color;
 }
 
-void CubeFace::fill(const CellColor & color) {
+void Cube::CubeFace::fill(const Cell::CellColor & color) {
     for (auto & c : cells)
         c.setColor(color);
 }
 
-bool CubeFace::isSolved() const {
+bool Cube::CubeFace::isSolved() const {
     std::vector<bool> isCenterColor;
     // map: are all cells in the face the same (center) color
     std::transform(cells.begin(), cells.end(),
@@ -50,6 +48,10 @@ bool CubeFace::isSolved() const {
     return solved;
 }
 
-bool CubeFace::isCenterCorrect() const {
+bool Cube::CubeFace::isCenterCorrect() const {
     return c22.getColor() == centerColor;
+}
+
+const std::vector<Cell &> &Cube::CubeFace::getCells() const {
+    return cells;
 }

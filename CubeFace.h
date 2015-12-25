@@ -6,22 +6,16 @@
 #define RUBIC_SOLVER_CUBEFACE_H
 
 #include <vector>
+#include "Cube.h"
 #include "Cell.h"
 
-class CubeFace
+class Cube::CubeFace
 {
-public:
-    void CubeFace(const CellColor & color);
-    void fill(const CellColor & color);
-    bool isSolved() const;
-    bool isCenterCorrect() const;
-    const std::vector<Cell &> &getCells() const {
-        return cells;
-    }
-
 private:
+    class Cell;
+
     std::vector<Cell &> cells;
-    CellColor centerColor;
+    Cell::CellColor centerColor;
     Cell c11;
     Cell c12;
     Cell c13;
@@ -31,6 +25,19 @@ private:
     Cell c31;
     Cell c32;
     Cell c33;
+
+public:
+    void CubeFace(const Cell::CellColor & color);
+    void fill(const Cell::CellColor & color);
+    void rotateCW();
+    void rotateCCW();
+    std::vector<Cell &> & getColumn(const int & i) const;
+    void setColumn(const int & i, std::vector<Cell &> & column);
+    std::vector<Cell &> & getRow(const int & i) const;
+    void setRow(const int & i, std::vector<Cell &> & row);
+    bool isSolved() const;
+    bool isCenterCorrect() const;
+    const std::vector<Cell &> &getCells() const;
 };
 
 #endif //RUBIC_SOLVER_CUBEFACE_H

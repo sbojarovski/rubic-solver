@@ -5,17 +5,16 @@
 #include <algorithm>
 
 #include "Cube.h"
-#include "Cell.h"
 
 Cube::Cube() :
         solved  (true),
         valid   (true),
-        front   (CellColor::WHITE),
-        back    (CellColor::YELLOW),
-        left    (CellColor::GREEN),
-        right   (CellColor::BLUE),
-        top     (CellColor::ORANGE),
-        bottom  (CellColor::RED)
+        front   (Cell::CellColor::WHITE),
+        back    (Cell::CellColor::YELLOW),
+        left    (Cell::CellColor::GREEN),
+        right   (Cell::CellColor::BLUE),
+        top     (Cell::CellColor::ORANGE),
+        bottom  (Cell::CellColor::RED)
 {
     // TODO: this is a bit ugly, I want to have a container for the faces
     // so that I can iterate them functional programming style, but I also

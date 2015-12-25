@@ -5,18 +5,7 @@
 #ifndef RUBIC_SOLVER_CELL_H
 #define RUBIC_SOLVER_CELL_H
 
-#include <assert.h>
-
-enum CellColor
-{
-    UNKNOWN = 0,
-    WHITE,
-    YELLOW,
-    BLUE,
-    GREEN,
-    ORANGE,
-    RED
-};
+#include "CubeFace.h"
 
 //
 // A cell is one face of a piece.
@@ -27,17 +16,23 @@ enum CellColor
 class Cell
 {
 public:
+    typedef enum CellColor;
+    enum CellColor
+    {
+        UNKNOWN = 0,
+        WHITE,
+        YELLOW,
+        BLUE,
+        GREEN,
+        ORANGE,
+        RED
+    };
+
     Cell(const CellColor & color);
+    void setColor(const CellColor &color);
+    const CellColor &getColor() const;
 
-    void setColor(const CellColor &color) {
-        Cell::color = color;
-    }
-
-    const CellColor &getColor() const {
-        return color;
-    }
-
-private:
+protected:
     CellColor color;
 };
 

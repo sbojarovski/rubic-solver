@@ -33,6 +33,8 @@ enum CubeTransforms
 class Cube
 {
 private:
+    class CubeFace;
+
     CubeFace front;
     CubeFace back;
     CubeFace left;
