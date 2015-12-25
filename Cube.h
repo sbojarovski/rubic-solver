@@ -70,7 +70,8 @@ public:
     bool isValid() const;
 
     bool isSolved() const;;
-    void scramble();
+    void scramble(const int & steps);
+    const CubeTransforms getRandomTransform() const;
     void solve();
 
     bool areCenterCellsCorrect() const;

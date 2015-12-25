@@ -3,6 +3,8 @@
 //
 
 #include <algorithm>
+#include <random>
+#include <assert.h>
 
 #include "Cube.h"
 
@@ -52,8 +54,12 @@ bool Cube::isValid() const {
     return centerCorrect && nineOfEach;
 }
 
-void Cube::scramble() {
 // generate a number of random transformations and apply them
+void Cube::scramble(const int & steps) {
+    for (int i = 0; i < steps; ++i) {
+        transform(getRandomTransform());
+        assert(isValid());
+    }
 }
 
 void Cube::solve() {
@@ -225,4 +231,13 @@ void Cube::bottomCCW() {
     right.setRow(3, back.getRow(3));
     back.setRow(3, left.getRow(3));
     left.setRow(3, oldFront3);
+}
+
+const CubeTransforms Cube::getRandomTransform() const {
+    // TODO: maybe make these static?
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 12);
+
+    return static_cast<CubeTransforms>(dis(gen));
 }
