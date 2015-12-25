@@ -108,49 +108,121 @@ bool Cube::areNinePerColor() const {
 }
 
 void Cube::frontCW() {
+    front.rotateCW();
 
+    CubeFace::CellVector oldTop3 = top.getRow(3);
+    top.setRow(3, left.getColumn(3));
+    left.setColumn(3, bottom.getRow(1));
+    bottom.setRow(1, right.getColumn(1));
+    right.setColumn(1, oldTop3);
 }
 
 void Cube::frontCCW() {
+    front.rotateCCW();
 
+    CubeFace::CellVector oldTop3 = top.getRow(3);
+    top.setRow(3, right.getColumn(1));
+    right.setColumn(1, bottom.getColumn(1));
+    bottom.setRow(1, left.getColumn(3));
+    left.setColumn(3, oldTop3);
 }
 
 void Cube::backCW() {
+    back.rotateCW();
 
+    CubeFace::CellVector oldTop1 = top.getRow(1);
+    top.setRow(1, left.getColumn(1));
+    left.setColumn(1, bottom.getRow(3));
+    bottom.setRow(3, right.getColumn(3));
+    right.setColumn(3, oldTop1);
 }
 
 void Cube::backCCW() {
+    back.rotateCCW();
 
+    CubeFace::CellVector oldTop1 = top.getRow(1);
+    top.setRow(1, right.getColumn(3));
+    right.setColumn(3, bottom.getRow(3));
+    bottom.setRow(3, left.getColumn(1));
+    left.setColumn(1, oldTop1);
 }
 
 void Cube::leftCW() {
+    left.rotateCW();
 
+    CubeFace::CellVector oldTop1 = top.getColumn(1);
+    top.setColumn(1, back.getColumn(1));
+    back.setColumn(1, bottom.getColumn(1));
+    bottom.setColumn(1, front.getColumn(1));
+    front.setColumn(1, oldTop1);
 }
 
 void Cube::leftCCW() {
+    left.rotateCCW();
 
+    CubeFace::CellVector oldTop1 = top.getColumn(1);
+    top.setColumn(1, front.getColumn(1));
+    front.setColumn(1, bottom.getColumn(1));
+    bottom.setColumn(1, back.getColumn(1));
+    back.setColumn(1, oldTop1);
 }
 
 void Cube::rightCW() {
+    right.rotateCW();
 
+    CubeFace::CellVector oldTop3 = top.getColumn(3);
+    top.setColumn(3, front.getColumn(3));
+    front.setColumn(3, bottom.getColumn(3));
+    bottom.setColumn(3, back.getColumn(3));
+    back.setColumn(3, oldTop3);
 }
 
 void Cube::rightCCW() {
+    right.rotateCCW();
 
+    CubeFace::CellVector oldTop3 = top.getColumn(3);
+    top.setColumn(3, back.getColumn(3));
+    back.setColumn(3, bottom.getColumn(3));
+    bottom.setColumn(3, front.getColumn(3));
+    front.setColumn(3, oldTop3);
 }
 
 void Cube::topCW() {
+    top.rotateCW();
 
+    CubeFace::CellVector oldFront1 = front.getRow(1);
+    front.setRow(1, right.getRow(1));
+    right.setRow(1, back.getRow(1));
+    back.setRow(1, left.getRow(1));
+    left.setRow(1, oldFront1);
 }
 
 void Cube::topCCW() {
+    top.rotateCCW();
 
+    CubeFace::CellVector oldFront1 = front.getRow(1);
+    front.setRow(1, left.getRow(1));
+    left.setRow(1, back.getRow(1));
+    back.setRow(1, right.getRow(1));
+    right.setRow(1, oldFront1);
 }
 
 void Cube::bottomCW() {
+    bottom.rotateCW();
 
+    CubeFace::CellVector oldFront3 = front.getRow(3);
+    front.setRow(3, left.getRow(3));
+    left.setRow(3, back.getRow(3));
+    back.setRow(3, right.getRow(3));
+    right.setRow(3, oldFront3);
 }
 
 void Cube::bottomCCW() {
+    bottom.rotateCCW();
 
+    CubeFace::CellVector oldFront3 = front.getRow(3);
+    front.setRow(3, left.getRow(3));
+    right.setRow(3, back.getRow(3));
+    back.setRow(3, left.getRow(3));
+    left.setRow(3, oldFront3);
 }
