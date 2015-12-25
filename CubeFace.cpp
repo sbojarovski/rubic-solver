@@ -79,19 +79,74 @@ void Cube::CubeFace::rotateCCW() {
 // that they are properly updated when I change something?
 const CellVector &
 Cube::CubeFace::getColumn(const int & i) const {
+    switch(i){
+        case 1  :
+            return CellVector{&c11, &c21, &c31};
+        case 2  :
+            return CellVector{&c12, &c22, &c32};
+        case 3  :
+            return CellVector{&c13, &c23, &c33};
+        default :
+            return NULL;
+    }
 }
 
 void
 Cube::CubeFace::setColumn(const int & i, const CellVector & column) {
-
+    switch(i){
+        case 1  :
+            c11.setColor(column.at(0)->getColor());
+            c21.setColor(column.at(1)->getColor());
+            c31.setColor(column.at(2)->getColor());
+            break;
+        case 2  :
+            c12.setColor(column.at(0)->getColor());
+            c22.setColor(column.at(1)->getColor());
+            c32.setColor(column.at(2)->getColor());
+            break;
+        case 3  :
+            c13.setColor(column.at(0)->getColor());
+            c23.setColor(column.at(1)->getColor());
+            c33.setColor(column.at(2)->getColor());
+            break;
+        default :
+            return;
+    }
 }
 
 const CellVector &
 Cube::CubeFace::getRow(const int & i) const {
-    return <#initializer#>;
+    switch(i){
+        case 1  :
+            return CellVector{&c11, &c12, &c13};
+        case 2  :
+            return CellVector{&c21, &c22, &c23};
+        case 3  :
+            return CellVector{&c31, &c32, &c33};
+        default :
+            return NULL;
+    }
 }
 
 void
 Cube::CubeFace::setRow(const int & i, const CellVector & row) {
-
+    switch(i){
+        case 1  :
+            c11.setColor(row.at(0)->getColor());
+            c12.setColor(row.at(1)->getColor());
+            c13.setColor(row.at(2)->getColor());
+            break;
+        case 2  :
+            c21.setColor(row.at(0)->getColor());
+            c22.setColor(row.at(1)->getColor());
+            c23.setColor(row.at(2)->getColor());
+            break;
+        case 3  :
+            c31.setColor(row.at(0)->getColor());
+            c32.setColor(row.at(1)->getColor());
+            c33.setColor(row.at(2)->getColor());
+            break;
+        default :
+            return;
+    }
 }
