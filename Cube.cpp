@@ -10,6 +10,8 @@
 #include "CubeFace.h"
 #include "Cell.h"
 
+std::map<CubeTransforms , Cube::transformPtr> Cube::rotationsMap;
+
 Cube::Cube() :
         solved  (true),
         valid   (true),

@@ -33,7 +33,7 @@ class Cube
 {
 public:
     class CubeFace;
-
+    typedef void(Cube::*transformPtr)();
 private:
     CubeFace * front;
     CubeFace * back;
@@ -47,8 +47,7 @@ private:
 
     std::vector<CubeFace *> faces;
 
-    typedef void(Cube::*transformPtr)();
-    static std::map<CubeTransforms , transformPtr> rotationsMap;
+    static std::map<CubeTransforms , Cube::transformPtr> rotationsMap;
 
     //TODO: write the transforms :)
     void frontCW();
