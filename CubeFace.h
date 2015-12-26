@@ -8,17 +8,6 @@
 #include <vector>
 #include "Cube.h"
 
-enum CellColor
-{
-    UNKNOWN = 0,
-    WHITE,
-    YELLOW,
-    BLUE,
-    GREEN,
-    ORANGE,
-    RED
-};
-
 class Cube::CubeFace
 {
 public:

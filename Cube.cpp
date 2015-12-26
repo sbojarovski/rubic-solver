@@ -24,14 +24,14 @@ Cube::Cube() :
 {
     // TODO: this is a bit ugly, I want to have a container for the faces
     // so that I can iterate them functional programming style, but I also
-    // want to have distinctive names for them for the transformations
-
+    // want to have distinctive names for them for implementing the transformations
     faces.push_back(front);
     faces.push_back(back);
     faces.push_back(left);
     faces.push_back(right);
     faces.push_back(top);
     faces.push_back(bottom);
+
     rotationsMap[ FRONT_CW  ] = &Cube::frontCW;
     rotationsMap[ FRONT_CCW ] = &Cube::frontCCW;
     rotationsMap[ BACK_CW   ] = &Cube::backCW;
@@ -244,4 +244,16 @@ const CubeTransforms Cube::getRandomTransform() const {
     std::uniform_int_distribution<> dis(1, 12);
 
     return static_cast<CubeTransforms>(dis(gen));
+}
+
+const std::vector<CellColor> Cube::getState() const {
+    std::vector<CellColor> state;
+    for (auto&& f : faces)
+    {
+        for (auto&& c : f->getCells())
+        {
+            state.push_back((*c).getColor());
+        }
+    }
+    return state;
 }

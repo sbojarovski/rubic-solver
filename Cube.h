@@ -8,6 +8,17 @@
 #include <vector>
 #include <map>
 
+enum CellColor
+{
+    UNKNOWN = 0,
+    WHITE,
+    YELLOW,
+    BLUE,
+    GREEN,
+    ORANGE,
+    RED
+};
+
 enum CubeTransforms
 {
     FRONT_CW = 1,
@@ -77,6 +88,11 @@ public:
     bool areCenterCellsCorrect() const;
 
     bool areNinePerColor() const;
+
+    // TODO: think about a standard orientation of the cube
+    // Returns the colors of the cells in the following order:
+    //      front, back, left, right, top bottom
+    const std::vector<CellColor> getState() const;
 };
 
 
