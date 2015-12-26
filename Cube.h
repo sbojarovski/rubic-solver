@@ -7,7 +7,6 @@
 
 #include <vector>
 #include <map>
-#include "CubeFace.h"
 
 enum CubeTransforms
 {
@@ -32,21 +31,23 @@ enum CubeTransforms
 //
 class Cube
 {
-private:
+public:
     class CubeFace;
 
-    CubeFace front;
-    CubeFace back;
-    CubeFace left;
-    CubeFace right;
-    CubeFace top;
-    CubeFace bottom;
+private:
+    CubeFace * front;
+    CubeFace * back;
+    CubeFace * left;
+    CubeFace * right;
+    CubeFace * top;
+    CubeFace * bottom;
 
     bool solved;
     bool valid;
 
     std::vector<CubeFace *> faces;
 
+    typedef void(Cube::*transformPtr)();
     static std::map<CubeTransforms , transformPtr> rotationsMap;
 
     //TODO: write the transforms :)
@@ -61,23 +62,22 @@ private:
     void topCW();
     void topCCW();
     void bottomCW();
-    void bottomCCW();
 
+    void bottomCCW();
 public:
-    void Cube();
+    Cube();
     void transform(const CubeTransforms & transform);
+
     // 9 cells of each color, center pieces all different etc.
     bool isValid() const;
-
     bool isSolved() const;;
     void scramble(const int & steps);
     const CubeTransforms getRandomTransform() const;
+
     void solve();
-
     bool areCenterCellsCorrect() const;
-    bool areNinePerColor() const;
 
-    typedef void(*transformPtr)();
+    bool areNinePerColor() const;
 };
 
 

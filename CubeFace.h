@@ -6,40 +6,51 @@
 #define RUBIC_SOLVER_CUBEFACE_H
 
 #include <vector>
+
 #include "Cube.h"
-#include "Cell.h"
+
+enum CellColor
+{
+    UNKNOWN = 0,
+    WHITE,
+    YELLOW,
+    BLUE,
+    GREEN,
+    ORANGE,
+    RED
+};
 
 class Cube::CubeFace
 {
 public:
-    typedef std::vector<Cell *> CellVector;
-private:
     class Cell;
-
+public:
+    typedef std::vector<CubeFace::Cell *> CellVector;
+private:
     CellVector cells;
-    Cell::CellColor centerColor;
-    Cell c11;
-    Cell c12;
-    Cell c13;
-    Cell c21;
-    Cell c22;
-    Cell c23;
-    Cell c31;
-    Cell c32;
-    Cell c33;
+    CellColor centerColor;
+    CubeFace::Cell * c11;
+    CubeFace::Cell * c12;
+    CubeFace::Cell * c13;
+    CubeFace::Cell * c21;
+    CubeFace::Cell * c22;
+    CubeFace::Cell * c23;
+    CubeFace::Cell * c31;
+    CubeFace::Cell * c32;
+    CubeFace::Cell * c33;
 
 public:
-    void CubeFace(const Cell::CellColor & color);
-    void fill(const Cell::CellColor & color);
+    CubeFace(CellColor color);
+    void fill(const CellColor & color);
     void rotateCW();
     void rotateCCW();
-    const CellVector & getColumn(const int & i) const;
+    const CellVector getColumn(const int & i) const;
     void setColumn(const int & i, const CellVector & column);
-    const CellVector & getRow(const int & i) const;
+    const CellVector getRow(const int & i) const;
     void setRow(const int & i, const CellVector & row);
     bool isSolved() const;
     bool isCenterCorrect() const;
-    CellVector getCells() const;
+    const CellVector & getCells() const;
 };
 
 #endif //RUBIC_SOLVER_CUBEFACE_H
