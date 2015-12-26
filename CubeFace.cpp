@@ -3,6 +3,7 @@
 //
 #include <algorithm>
 #include <assert.h>
+
 #include "CubeFace.h"
 #include "Cell.h"
 

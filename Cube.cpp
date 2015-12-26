@@ -8,6 +8,7 @@
 
 #include "Cube.h"
 #include "CubeFace.h"
+#include "Cell.h"
 
 Cube::Cube() :
         solved  (true),

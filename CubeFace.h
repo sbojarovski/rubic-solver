@@ -6,7 +6,6 @@
 #define RUBIC_SOLVER_CUBEFACE_H
 
 #include <vector>
-
 #include "Cube.h"
 
 enum CellColor
@@ -25,19 +24,19 @@ class Cube::CubeFace
 public:
     class Cell;
 public:
-    typedef std::vector<CubeFace::Cell *> CellVector;
+    typedef std::vector<Cell *> CellVector;
 private:
     CellVector cells;
     CellColor centerColor;
-    CubeFace::Cell * c11;
-    CubeFace::Cell * c12;
-    CubeFace::Cell * c13;
-    CubeFace::Cell * c21;
-    CubeFace::Cell * c22;
-    CubeFace::Cell * c23;
-    CubeFace::Cell * c31;
-    CubeFace::Cell * c32;
-    CubeFace::Cell * c33;
+    Cell * c11;
+    Cell * c12;
+    Cell * c13;
+    Cell * c21;
+    Cell * c22;
+    Cell * c23;
+    Cell * c31;
+    Cell * c32;
+    Cell * c33;
 
 public:
     CubeFace(CellColor color);
