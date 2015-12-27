@@ -11,13 +11,13 @@
 
 int main(int, char**)
 {
-    cv::Mat img(600, 800, CV_8UC3, cv::Scalar::all(0));
+    cv::Mat img(320, 320, CV_8UC3, cv::Scalar::all(0));
 
-    cv::namedWindow("Rubick", 1);
+    cv::namedWindow("Rubik Solver", 1);
     Cube cube;
     CubeDrawer2D dCube(cube);
     dCube.draw(&img, dCube.mDefaultColorMap);
-    imshow("Rubick", img);
+    imshow("Rubik Solver", img);
 
     cv::waitKey();
     return 0;

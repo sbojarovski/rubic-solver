@@ -13,8 +13,8 @@ enum CellColor
     UNKNOWN = 0,
     WHITE,
     YELLOW,
-    BLUE,
     GREEN,
+    BLUE,
     ORANGE,
     RED
 };

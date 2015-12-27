@@ -8,12 +8,13 @@
 std::map<CellColor , cv::Scalar> CubeDrawer2D::mDefaultColorMap;
 
 CubeDrawer2D::CubeDrawer2D(const Cube &cube) {
+    // cv::Scalar is actually BGR
     mDefaultColorMap[CellColor::WHITE ] = cv::Scalar(255, 255, 255);
-    mDefaultColorMap[CellColor::YELLOW] = cv::Scalar(  0, 255, 255);
-    mDefaultColorMap[CellColor::BLUE  ] = cv::Scalar(  0,   0, 255);
+    mDefaultColorMap[CellColor::YELLOW] = cv::Scalar(  0, 155, 150);
+    mDefaultColorMap[CellColor::BLUE  ] = cv::Scalar(255,   0,   0);
     mDefaultColorMap[CellColor::GREEN ] = cv::Scalar(  0, 255,   0);
-    mDefaultColorMap[CellColor::ORANGE] = cv::Scalar(255,  50,  50);
-    mDefaultColorMap[CellColor::RED   ] = cv::Scalar(255,   0,   0);
+    mDefaultColorMap[CellColor::ORANGE] = cv::Scalar(  0, 150, 250);
+    mDefaultColorMap[CellColor::RED   ] = cv::Scalar(  0,   0, 255);
 
     std::vector<CellColor > colors = cube.getState();
     this->front.c11.mColor = mDefaultColorMap[colors[0]];
@@ -94,11 +95,11 @@ void CubeDrawer2D::initLengths(cv::Mat *image) {
 }
 
 void CubeDrawer2D::generateFacePositions() {
-    front.setOrigin( cv::Point2i(mOrigin.x +     mFaceCanvasSize, mOrigin.y + mFaceCanvasSize));
-    back.setOrigin(  cv::Point2i(mOrigin.x + 3 * mFaceCanvasSize, mOrigin.y + mFaceCanvasSize));
-    left.setOrigin(  cv::Point2i(mOrigin.x + 2 * mFaceCanvasSize, mOrigin.y + mFaceCanvasSize));
-    right.setOrigin( cv::Point2i(mOrigin.x +     mFaceCanvasSize, mOrigin.y));
-    top.setOrigin(   cv::Point2i(mOrigin.x +     mFaceCanvasSize, mOrigin.y));
+    front.setOrigin( cv::Point2i(mOrigin.x +     mFaceCanvasSize, mOrigin.y +     mFaceCanvasSize));
+    back.setOrigin(  cv::Point2i(mOrigin.x + 3 * mFaceCanvasSize, mOrigin.y +     mFaceCanvasSize));
+    left.setOrigin(  cv::Point2i(mOrigin.x                      , mOrigin.y +     mFaceCanvasSize));
+    right.setOrigin( cv::Point2i(mOrigin.x + 2 * mFaceCanvasSize, mOrigin.y +     mFaceCanvasSize));
+    top.setOrigin(   cv::Point2i(mOrigin.x +     mFaceCanvasSize, mOrigin.y                      ));
     bottom.setOrigin(cv::Point2i(mOrigin.x +     mFaceCanvasSize, mOrigin.y + 2 * mFaceCanvasSize));
 
     front.setSize(mFaceCanvasSize);
@@ -128,15 +129,16 @@ void Face2D::draw(cv::Mat *image, const std::map<CellColor, cv::Scalar> &colorMa
 }
 
 void Face2D::initCells() {
-    c11.setOrigin(mOrigin); c11.setSize(mSize / 3);
-    c12.setOrigin(mOrigin); c12.setSize(mSize / 3);
-    c13.setOrigin(mOrigin); c13.setSize(mSize / 3);
-    c21.setOrigin(mOrigin); c21.setSize(mSize / 3);
-    c22.setOrigin(mOrigin); c22.setSize(mSize / 3);
-    c23.setOrigin(mOrigin); c23.setSize(mSize / 3);
-    c31.setOrigin(mOrigin); c31.setSize(mSize / 3);
-    c32.setOrigin(mOrigin); c32.setSize(mSize / 3);
-    c33.setOrigin(mOrigin); c33.setSize(mSize / 3);
+    int cellSize = mSize / 3;
+    c11.setOrigin(mOrigin.x               , mOrigin.y               ); c11.setSize(cellSize);
+    c12.setOrigin(mOrigin.x +     cellSize, mOrigin.y               ); c12.setSize(cellSize);
+    c13.setOrigin(mOrigin.x + 2 * cellSize, mOrigin.y               ); c13.setSize(cellSize);
+    c21.setOrigin(mOrigin.x               , mOrigin.y +     cellSize); c21.setSize(cellSize);
+    c22.setOrigin(mOrigin.x +     cellSize, mOrigin.y +     cellSize); c22.setSize(cellSize);
+    c23.setOrigin(mOrigin.x + 2 * cellSize, mOrigin.y +     cellSize); c23.setSize(cellSize);
+    c31.setOrigin(mOrigin.x               , mOrigin.y + 2 * cellSize); c31.setSize(cellSize);
+    c32.setOrigin(mOrigin.x +     cellSize, mOrigin.y + 2 * cellSize); c32.setSize(cellSize);
+    c33.setOrigin(mOrigin.x + 2 * cellSize, mOrigin.y + 2 * cellSize); c33.setSize(cellSize);
 }
 
 void Face2D::drawCells(cv::Mat *image, const std::map<CellColor, cv::Scalar> &colorMap) {
@@ -159,6 +161,10 @@ void Cell2D::draw(cv::Mat *image, const std::map<CellColor, cv::Scalar> &colorMa
     cv::rectangle(*image, mOrigin, cv::Point2i(mOrigin.x + mSize, mOrigin.y + mSize), mColor);
 }
 
+void Cell2D::setOrigin(const int & x, const int & y) {
+    mOrigin.x = x;
+    mOrigin.y = y;
+}
 void Cell2D::setOrigin(cv::Point2i &orig) {
     mOrigin = cv::Point2i(orig.x + mInnerCellMargin, orig.y + mInnerCellMargin);
 }

@@ -21,6 +21,8 @@ public:
     void draw(cv::Mat * image, const std::map<CellColor, cv::Scalar> &colorMap);
     void setOrigin(cv::Point2i & orig);
     void setSize(const int & size);
+
+    void setOrigin(const int &x, const int &y);
 };
 
 class Face2D
