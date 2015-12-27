@@ -6,24 +6,19 @@
 // Example copied from
 // http://docs.opencv.org/2.4/modules/highgui/doc/reading_and_writing_images_and_video.html
 #include "opencv2/opencv.hpp"
-
-using namespace cv;
+#include "Cube.h"
+#include "CubeDrawer2D.h"
 
 int main(int, char**)
 {
-    VideoCapture cap(0); // open the default camera
-    if(!cap.isOpened())  // check if we succeeded
-        return -1;
+    cv::Mat img(600, 800, CV_8UC3, cv::Scalar::all(0));
 
-    namedWindow("edges", 1);
-    for(;;)
-    {
-        Mat frame;
-        cap >> frame; // get a new frame from camera
-        flip(frame, frame, 1);
-        imshow("edges", frame);
-        if(waitKey(30) >= 0) break; // Esc to exit
-    }
-    // the camera will be deinitialized automatically in VideoCapture destructor
+    cv::namedWindow("Rubick", 1);
+    Cube cube;
+    CubeDrawer2D dCube(cube);
+    dCube.draw(&img, dCube.mDefaultColorMap);
+    imshow("Rubick", img);
+
+    cv::waitKey();
     return 0;
 }
