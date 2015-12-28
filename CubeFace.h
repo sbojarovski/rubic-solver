@@ -13,9 +13,10 @@ class Cube::CubeFace
 public:
     class Cell;
 public:
-    typedef std::vector<Cell *> CellVector;
+    typedef std::vector<Cell> CellVector;
+    typedef std::vector<Cell *> CellPtrVector;
 private:
-    CellVector cells;
+    CellPtrVector cells;
     CellColor centerColor;
     Cell * c11;
     Cell * c12;
@@ -38,7 +39,7 @@ public:
     void setRow(const int & i, const CellVector & row);
     bool isSolved() const;
     bool isCenterCorrect() const;
-    const CellVector & getCells() const;
+    const CellPtrVector & getCells() const;
 };
 
 #endif //RUBIC_SOLVER_CUBEFACE_H

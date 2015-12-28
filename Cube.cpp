@@ -48,6 +48,8 @@ Cube::Cube() :
 
 void Cube::transform(const CubeTransforms &transform) {
     (this->*rotationsMap[transform])();
+    transformLog.push_back(transform);
+    assert(isValid());
 }
 
 bool Cube::isValid() const {
@@ -62,7 +64,6 @@ bool Cube::isValid() const {
 void Cube::scramble(const int & steps) {
     for (int i = 0; i < steps; ++i) {
         transform(getRandomTransform());
-        assert(isValid());
     }
 }
 
@@ -99,7 +100,7 @@ bool Cube::areCenterCellsCorrect() const {
 }
 
 bool Cube::areNinePerColor() const {
-    std::vector<int> colorHistogram(6);
+    std::vector<int> colorHistogram(7);
     for (auto&& f : faces)
     {
         for (auto&& c : f->getCells())
@@ -109,11 +110,11 @@ bool Cube::areNinePerColor() const {
     }
     // as long as the adjacent elements are the same
     // it moves along the vector
-    bool allEqual = std::adjacent_find(colorHistogram.begin(),
+    bool allEqual = std::adjacent_find(colorHistogram.begin() + 1,  // because of 0
                                        colorHistogram.end(),
                                        std::not_equal_to<int>())
                     == colorHistogram.end();
-    allEqual = allEqual && (colorHistogram[0] == 9);
+    allEqual = allEqual && (colorHistogram[1] == 9);
     return allEqual;
 }
 
@@ -132,7 +133,7 @@ void Cube::frontCCW() {
 
     CubeFace::CellVector oldTop3 = top->getRow(3);
     top->setRow(3, right->getColumn(1));
-    right->setColumn(1, bottom->getColumn(1));
+    right->setColumn(1, bottom->getRow(1));
     bottom->setRow(1, left->getColumn(3));
     left->setColumn(3, oldTop3);
 }
@@ -231,7 +232,7 @@ void Cube::bottomCCW() {
     bottom->rotateCCW();
 
     CubeFace::CellVector oldFront3 = front->getRow(3);
-    front->setRow(3, left->getRow(3));
+    front->setRow(3, right->getRow(3));
     right->setRow(3, back->getRow(3));
     back->setRow(3, left->getRow(3));
     left->setRow(3, oldFront3);

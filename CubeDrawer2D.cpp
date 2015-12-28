@@ -10,10 +10,10 @@ std::map<CellColor , cv::Scalar> CubeDrawer2D::mDefaultColorMap;
 CubeDrawer2D::CubeDrawer2D(const Cube &cube) {
     // cv::Scalar is actually BGR
     mDefaultColorMap[CellColor::WHITE ] = cv::Scalar(255, 255, 255);
-    mDefaultColorMap[CellColor::YELLOW] = cv::Scalar(  0, 155, 150);
+    mDefaultColorMap[CellColor::YELLOW] = cv::Scalar(  0, 255, 255);
     mDefaultColorMap[CellColor::BLUE  ] = cv::Scalar(255,   0,   0);
     mDefaultColorMap[CellColor::GREEN ] = cv::Scalar(  0, 255,   0);
-    mDefaultColorMap[CellColor::ORANGE] = cv::Scalar(  0, 150, 250);
+    mDefaultColorMap[CellColor::ORANGE] = cv::Scalar(  0, 150, 255);
     mDefaultColorMap[CellColor::RED   ] = cv::Scalar(  0,   0, 255);
 
     std::vector<CellColor > colors = cube.getState();
@@ -158,7 +158,7 @@ void Face2D::setSize(const int &size) {
 }
 
 void Cell2D::draw(cv::Mat *image, const std::map<CellColor, cv::Scalar> &colorMap) {
-    cv::rectangle(*image, mOrigin, cv::Point2i(mOrigin.x + mSize, mOrigin.y + mSize), mColor);
+    cv::rectangle(*image, mOrigin, cv::Point2i(mOrigin.x + mSize, mOrigin.y + mSize), mColor, CV_FILLED);
 }
 
 void Cell2D::setOrigin(const int & x, const int & y) {

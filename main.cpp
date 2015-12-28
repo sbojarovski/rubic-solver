@@ -15,6 +15,10 @@ int main(int, char**)
 
     cv::namedWindow("Rubik Solver", 1);
     Cube cube;
+    cube.transform(LEFT_CCW);
+    cube.transform(TOP_CW);
+    cube.transform(BACK_CCW);
+    //cube.scramble(3);
     CubeDrawer2D dCube(cube);
     dCube.draw(&img, dCube.mDefaultColorMap);
     imshow("Rubik Solver", img);

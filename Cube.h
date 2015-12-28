@@ -60,7 +60,8 @@ private:
 
     static std::map<CubeTransforms , Cube::transformPtr> rotationsMap;
 
-    //TODO: write the transforms :)
+    std::vector<CubeTransforms> transformLog;
+
     void frontCW();
     void frontCCW();
     void backCW();

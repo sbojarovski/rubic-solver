@@ -55,7 +55,7 @@ bool Cube::CubeFace::isCenterCorrect() const {
     return c22->getColor() == centerColor;
 }
 
-const Cube::CubeFace::CellVector &
+const Cube::CubeFace::CellPtrVector &
 Cube::CubeFace::getCells() const {
     return cells;
 }
@@ -63,34 +63,31 @@ Cube::CubeFace::getCells() const {
 void Cube::CubeFace::rotateCW() {
     CellVector coll1 = getColumn(1);
 
-    setColumn(3, getRow(1));
-    setRow(3, getColumn(3));
     setColumn(1, getRow(3));
+    setRow(3, getColumn(3));
+    setColumn(3, getRow(1));
     setRow(1, coll1);
 }
 
 void Cube::CubeFace::rotateCCW() {
-    CellVector row1 = getRow(1);
+    CellVector coll1 = getColumn(1);
 
+    setColumn(1, getRow(1));
     setRow(1, getColumn(3));
     setColumn(3, getRow(3));
-    setRow(3, getColumn(1));
-    setColumn(1, row1);
+    setRow(3, coll1);
 }
 
-// if I name the rows and cols explicitly, then I have to make sure
-// that they are properly updated when I change something?
 const Cube::CubeFace::CellVector
 Cube::CubeFace::getColumn(const int & i) const {
     assert(i >= 1 && i <= 3);
-    // TODO: warning returning ref to temp
     switch(i){
         case 1  :
-            return CellVector{c11, c21, c31};
+            return CellVector{*c11, *c21, *c31};
         case 2  :
-            return CellVector{c12, c22, c32};
+            return CellVector{*c12, *c22, *c32};
         case 3  :
-            return CellVector{c13, c23, c33};
+            return CellVector{*c13, *c23, *c33};
         default :
             return CellVector{};
     }
@@ -100,19 +97,19 @@ void
 Cube::CubeFace::setColumn(const int & i, const CellVector & column) {
     switch(i){
         case 1  :
-            c11->setColor(column.at(0)->getColor());
-            c21->setColor(column.at(1)->getColor());
-            c31->setColor(column.at(2)->getColor());
+            c11->setColor(column.at(0).getColor());
+            c21->setColor(column.at(1).getColor());
+            c31->setColor(column.at(2).getColor());
             break;
         case 2  :
-            c12->setColor(column.at(0)->getColor());
-            c22->setColor(column.at(1)->getColor());
-            c32->setColor(column.at(2)->getColor());
+            c12->setColor(column.at(0).getColor());
+            c22->setColor(column.at(1).getColor());
+            c32->setColor(column.at(2).getColor());
             break;
         case 3  :
-            c13->setColor(column.at(0)->getColor());
-            c23->setColor(column.at(1)->getColor());
-            c33->setColor(column.at(2)->getColor());
+            c13->setColor(column.at(0).getColor());
+            c23->setColor(column.at(1).getColor());
+            c33->setColor(column.at(2).getColor());
             break;
         default :
             return;
@@ -124,11 +121,11 @@ Cube::CubeFace::getRow(const int & i) const {
     assert(i >= 1 && i <= 3);
     switch(i){
         case 1  :
-            return CellVector{c11, c12, c13};
+            return CellVector{*c11, *c12, *c13};
         case 2  :
-            return CellVector{c21, c22, c23};
+            return CellVector{*c21, *c22, *c23};
         case 3  :
-            return CellVector{c31, c32, c33};
+            return CellVector{*c31, *c32, *c33};
         default :
             return CellVector{};
     }
@@ -138,19 +135,19 @@ void
 Cube::CubeFace::setRow(const int & i, const CellVector & row) {
     switch(i){
         case 1  :
-            c11->setColor(row.at(0)->getColor());
-            c12->setColor(row.at(1)->getColor());
-            c13->setColor(row.at(2)->getColor());
+            c11->setColor(row.at(0).getColor());
+            c12->setColor(row.at(1).getColor());
+            c13->setColor(row.at(2).getColor());
             break;
         case 2  :
-            c21->setColor(row.at(0)->getColor());
-            c22->setColor(row.at(1)->getColor());
-            c23->setColor(row.at(2)->getColor());
+            c21->setColor(row.at(0).getColor());
+            c22->setColor(row.at(1).getColor());
+            c23->setColor(row.at(2).getColor());
             break;
         case 3  :
-            c31->setColor(row.at(0)->getColor());
-            c32->setColor(row.at(1)->getColor());
-            c33->setColor(row.at(2)->getColor());
+            c31->setColor(row.at(0).getColor());
+            c32->setColor(row.at(1).getColor());
+            c33->setColor(row.at(2).getColor());
             break;
         default :
             return;
