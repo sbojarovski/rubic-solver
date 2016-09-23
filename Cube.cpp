@@ -162,8 +162,8 @@ void Cube::leftCW() {
     left->rotateCW();
 
     CubeFace::CellVector oldTop1 = top->getColumn(1);
-    top->setColumn(1, back->getColumn(1));
-    back->setColumn(1, bottom->getColumn(1));
+    top->setColumn(1, back->getColumn(3));
+    back->setColumn(3, bottom->getColumn(1));
     bottom->setColumn(1, front->getColumn(1));
     front->setColumn(1, oldTop1);
 }
@@ -174,8 +174,8 @@ void Cube::leftCCW() {
     CubeFace::CellVector oldTop1 = top->getColumn(1);
     top->setColumn(1, front->getColumn(1));
     front->setColumn(1, bottom->getColumn(1));
-    bottom->setColumn(1, back->getColumn(1));
-    back->setColumn(1, oldTop1);
+    bottom->setColumn(1, back->getColumn(3));
+    back->setColumn(3, oldTop1);
 }
 
 void Cube::rightCW() {
