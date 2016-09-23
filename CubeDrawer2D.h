@@ -18,7 +18,7 @@ public:
 
     cv::Scalar mColor;
 
-    void draw(cv::Mat * image, const std::map<CellColor, cv::Scalar> &colorMap);
+    void draw(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap);
     void setOrigin(cv::Point2i & orig);
     void setSize(const int & size);
 
@@ -43,12 +43,12 @@ public:
     Cell2D c32;
     Cell2D c33;
 
-    void draw(cv::Mat * image, const std::map<CellColor , cv::Scalar> & colorMap);
+    void draw(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap);
     void setOrigin(const cv::Point2i & orig);
     void setSize(const int & size);
 private:
     void initCells();
-    void drawCells(cv::Mat * image, const std::map<CellColor , cv::Scalar> & colorMap);
+    void drawCells(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap);
 };
 
 class CubeDrawer2D
@@ -66,12 +66,12 @@ public:
     Face2D top;
     Face2D bottom;
 
-    void draw(cv::Mat * image, const std::map<CellColor , cv::Scalar> & colorMap);
+    void draw(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap);
 
 private:
-    void initLengths(cv::Mat *image);
+    void initLengths(cv::Mat &image);
     void generateFacePositions();
-    void drawFaces(cv::Mat * image, const std::map<CellColor , cv::Scalar> & colorMap);
+    void drawFaces(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap);
 public:
     static std::map<CellColor , cv::Scalar> mDefaultColorMap;
 };

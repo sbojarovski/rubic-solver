@@ -78,15 +78,15 @@ CubeDrawer2D::CubeDrawer2D(const Cube &cube) {
     this->bottom.c33.mColor = mDefaultColorMap[colors[53]];
 }
 
-void CubeDrawer2D::draw(cv::Mat *image, const std::map<CellColor , cv::Scalar> & colorMap) {
+void CubeDrawer2D::draw(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap) {
     initLengths(image);
     generateFacePositions();
     drawFaces(image, colorMap);
 }
 
-void CubeDrawer2D::initLengths(cv::Mat *image) {
+void CubeDrawer2D::initLengths(cv::Mat &image) {
     // take the width of the image
-    int imWidth = image->cols;
+    int imWidth = image.cols;
     // take out a margin of X = 10 pixels from each side
     mCanvasMargin = 10;
     mOrigin = cv::Point2i(mCanvasMargin, mCanvasMargin);
@@ -110,7 +110,7 @@ void CubeDrawer2D::generateFacePositions() {
     bottom.setSize(mFaceCanvasSize);
 }
 
-void CubeDrawer2D::drawFaces(cv::Mat * image, const std::map<CellColor , cv::Scalar> & colorMap) {
+void CubeDrawer2D::drawFaces(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap) {
     front.draw(image, colorMap);
     back.draw(image, colorMap);
     left.draw(image, colorMap);
@@ -123,7 +123,7 @@ void Face2D::setOrigin(const cv::Point2i &orig) {
     mOrigin = cv::Point2i(orig.x + mInnerMargin, orig.y + mInnerMargin);
 }
 
-void Face2D::draw(cv::Mat *image, const std::map<CellColor, cv::Scalar> &colorMap) {
+void Face2D::draw(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap) {
     initCells();
     drawCells(image, colorMap);
 }
@@ -141,7 +141,7 @@ void Face2D::initCells() {
     c33.setOrigin(mOrigin.x + 2 * cellSize, mOrigin.y + 2 * cellSize); c33.setSize(cellSize);
 }
 
-void Face2D::drawCells(cv::Mat *image, const std::map<CellColor, cv::Scalar> &colorMap) {
+void Face2D::drawCells(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap) {
     c11.draw(image, colorMap);
     c12.draw(image, colorMap);
     c13.draw(image, colorMap);
@@ -157,8 +157,8 @@ void Face2D::setSize(const int &size) {
     mSize = size;
 }
 
-void Cell2D::draw(cv::Mat *image, const std::map<CellColor, cv::Scalar> &colorMap) {
-    cv::rectangle(*image, mOrigin, cv::Point2i(mOrigin.x + mSize, mOrigin.y + mSize), mColor, CV_FILLED);
+void Cell2D::draw(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap) {
+    cv::rectangle(image, mOrigin, cv::Point2i(mOrigin.x + mSize, mOrigin.y + mSize), mColor, CV_FILLED);
 }
 
 void Cell2D::setOrigin(const int & x, const int & y) {
