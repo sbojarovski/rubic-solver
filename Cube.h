@@ -73,8 +73,8 @@ private:
     void topCW();
     void topCCW();
     void bottomCW();
-
     void bottomCCW();
+
 public:
     Cube();
     void transform(const CubeTransforms & transform);
