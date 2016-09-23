@@ -24,17 +24,42 @@ void drawStepTransform(Cube & cube, std::vector<CubeTransforms > & transforms)
     }
 }
 
-int main(int, char**)
+void testAllTransforms()
 {
     Cube cube;
 
-    std::vector<CubeTransforms > tvec = {LEFT_CCW,
-                                         TOP_CW,
-                                         BACK_CCW};
+    std::vector<CubeTransforms > tvec = {
+            LEFT_CCW,
+            LEFT_CW,
+            LEFT_CW,
+            LEFT_CCW,
+            FRONT_CCW,
+            FRONT_CW,
+            FRONT_CW,
+            FRONT_CCW,
+            RIGHT_CCW,
+            RIGHT_CW,
+            RIGHT_CW,
+            RIGHT_CCW,
+            BACK_CCW,
+            BACK_CW,
+            BACK_CW,
+            BACK_CCW,
+            TOP_CCW,
+            TOP_CW,
+            TOP_CW,
+            TOP_CCW,
+            BOTTOM_CCW,
+            BOTTOM_CW,
+            BOTTOM_CW,
+            BOTTOM_CCW
+    };
 
     drawStepTransform(cube, tvec);
+}
 
-    //cube.scramble(3);
-
+int main(int, char**)
+{
+    Cube cube;
     return 0;
 }
