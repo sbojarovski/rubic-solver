@@ -244,13 +244,20 @@ void Cube::bottomCCW() {
     left->setRow(3, oldFront3);
 }
 
-const CubeTransforms Cube::getRandomTransform() const {
+const CubeTransforms Cube::getRandomTransform() {
     // TODO: maybe make these static?
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, 12);
 
     return static_cast<CubeTransforms>(dis(gen));
+}
+
+const std::vector<CubeTransforms> Cube::getRandomTransformVec(const int & n) {
+    std::vector<CubeTransforms > tvec;
+    for(int i = 0; i < n; ++i)
+        tvec.push_back(getRandomTransform());
+    return tvec;
 }
 
 const std::vector<CellColor> Cube::getState() const {

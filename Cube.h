@@ -94,7 +94,8 @@ public:
     // Scramble the faces of the cube
     void scramble(const int & steps);
     // Get a random transformation of the cube's faces
-    const CubeTransforms getRandomTransform() const;
+    static const CubeTransforms getRandomTransform();
+    static const std::vector<CubeTransforms > getRandomTransformVec(const int & n = 1);
 
     // Solve the cube
     void solve();
