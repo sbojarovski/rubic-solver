@@ -8,12 +8,12 @@
 Cube::CubeFace::Cell::Cell(const CellColor &color)
         :color(CellColor::UNKNOWN)
 {
-    assert(color <= 0 && color <= 6);
+    assert(color >= 0 && color <= 6);
     this->color = color;
 }
 
 void Cube::CubeFace::Cell::setColor(const CellColor &color) {
-    assert(color <= 0 && color <= 6);
+    assert(color >= 0 && color <= 6);
     this->color = color;
 }
 
