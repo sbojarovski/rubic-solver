@@ -17,7 +17,7 @@ void drawStepTransform(Cube & cube, std::vector<CubeTransforms > & transforms)
     for(auto t : transforms)
     {
         CubeDrawer2D dCube(cube);
-        dCube.draw(img, dCube.mDefaultColorMap);
+        dCube.draw(img);
         imshow("Rubik Solver", img);
         cv::waitKey();
         cube.transform(t);
@@ -60,6 +60,6 @@ void testAllTransforms()
 
 int main(int, char**)
 {
-    Cube cube;
+    testAllTransforms();
     return 0;
 }

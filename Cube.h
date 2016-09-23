@@ -8,15 +8,18 @@
 #include <vector>
 #include <map>
 
+//
+// Defines the default colors for the cube
+//
 enum CellColor
 {
     UNKNOWN = 0,
-    WHITE,
-    YELLOW,
-    GREEN,
-    BLUE,
-    ORANGE,
-    RED
+    WHITE = 1,
+    YELLOW = 2,
+    GREEN = 3,
+    BLUE = 4,
+    ORANGE = 5,
+    RED = 6
 };
 
 enum CubeTransforms
@@ -46,6 +49,7 @@ public:
     class CubeFace;
     typedef void(Cube::*transformPtr)();
 private:
+    // TODO: do these have to be pointers?
     CubeFace * front;
     CubeFace * back;
     CubeFace * left;
@@ -80,17 +84,26 @@ public:
     void transform(const CubeTransforms & transform);
 
     // 9 cells of each color, center pieces all different etc.
+    // Warning:   Since this is not a physical model of a cube
+    //            the number of colors can be correct, however
+    //            the cube might still be in an incorrect state.
     bool isValid() const;
-    bool isSolved() const;;
+    // Returns true if the cube is solved. Solved means each cell in a face is the same color
+    // and each face is a unique color.
+    bool isSolved() const;
+    // Scramble the faces of the cube
     void scramble(const int & steps);
+    // Get a random transformation of the cube's faces
     const CubeTransforms getRandomTransform() const;
 
+    // Solve the cube
     void solve();
+    // Returns true if the centers of the cube are the correct color. They should never change.
     bool areCenterCellsCorrect() const;
 
+    // Returns true if there are exactly 9 cells of each color.
     bool areNinePerColor() const;
 
-    // TODO: think about a standard orientation of the cube
     // Returns the colors of the cells in the following order:
     //      front, back, left, right, top bottom
     const std::vector<CellColor> getState() const;

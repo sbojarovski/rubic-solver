@@ -73,12 +73,13 @@ void Cube::solve() {
 
 bool Cube::isSolved() const {
     std::vector<bool> isFaceSolved;
-    //map
+    // check if faces are solved and collect the results in a vector
     std::transform(faces.begin(), faces.end(),
                    std::back_inserter(isFaceSolved),
                     [](CubeFace * f){return f->isSolved();});
+
     bool allFacesSolved = false;
-    //reduce
+    // reduce the vector of results with the operator &&
     allFacesSolved = std::accumulate(isFaceSolved.begin(), isFaceSolved.end(),
                                     true,
                                      [](bool current, bool next){return current && next;});
@@ -87,10 +88,11 @@ bool Cube::isSolved() const {
 
 bool Cube::areCenterCellsCorrect() const {
     std::vector<bool> areCentersCorrect;
-    // map: are all the center cells the valid color
+    // check if all the center cells the valid color and save results in a vector
     std::transform(faces.begin(), faces.end(),
                    std::back_inserter(areCentersCorrect),
                    [](const CubeFace * f){return f->isCenterCorrect();});
+
     bool centersCorrect = false;
     //reduce
     centersCorrect = std::accumulate(areCentersCorrect.begin(), areCentersCorrect.end(),
@@ -100,6 +102,7 @@ bool Cube::areCenterCellsCorrect() const {
 }
 
 bool Cube::areNinePerColor() const {
+    // Compute a histogram of all the colors in the current cube
     std::vector<int> colorHistogram(7);
     for (auto&& f : faces)
     {
@@ -108,12 +111,15 @@ bool Cube::areNinePerColor() const {
             colorHistogram[(*c).getColor()]++;
         }
     }
+
+    // Check if all the values in the histogram are equal
     // as long as the adjacent elements are the same
     // it moves along the vector
     bool allEqual = std::adjacent_find(colorHistogram.begin() + 1,  // because of 0
                                        colorHistogram.end(),
                                        std::not_equal_to<int>())
                     == colorHistogram.end();
+    // Checks if all the values are equal to 9
     allEqual = allEqual && (colorHistogram[1] == 9);
     return allEqual;
 }
