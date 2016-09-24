@@ -9,7 +9,7 @@
 #include "Cube.h"
 #include "CubeDrawer2D.h"
 
-void drawStepTransform(Cube & cube, std::vector<CubeTransforms > & transforms)
+void drawStepTransform(Cube & cube, const std::vector<CubeTransforms > & transforms)
 {
     cv::Mat img(320, 320, CV_8UC3, cv::Scalar::all(0));
     cv::namedWindow("Rubik Solver", 1);
@@ -60,6 +60,7 @@ void testAllTransforms()
 
 int main(int, char**)
 {
-    testAllTransforms();
+    Cube cube;
+    drawStepTransform(cube, Cube::getRandomTransformVec(10));
     return 0;
 }
