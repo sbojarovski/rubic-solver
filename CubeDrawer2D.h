@@ -53,6 +53,8 @@ public:
     Cell2D c32;
     Cell2D c33;
 
+    std::vector<Cell2D *> mCells = {&c11, &c12, &c13, &c21, &c22, &c23, &c31, &c32, &c33};
+
     // Set the top left corner of the canvas
     void setOrigin(const cv::Point2i & orig);
     // Set the canvas size for this face
@@ -70,7 +72,17 @@ private:
 class CubeDrawer2D
 {
 public:
+    // Cube drawer constructor
     CubeDrawer2D(const Cube & cube);
+    // Draws a 2D unwrapped cube to a given image, with a given colormap
+    void draw(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap = mDefaultColorMap);
+
+public:
+    // assigns a 3-component (BGR) cv color to the default color enum
+    static std::map<CellColor , cv::Scalar> mDefaultColorMap;
+
+private:
+    const Cube * mCube;
     // The top left corner of the image where the drawing of the faces will start
     cv::Point2i mOrigin;
     // The number of pixels to take away from the borders of the window
@@ -85,8 +97,7 @@ public:
     Face2D top;
     Face2D bottom;
 
-    // Draws a 2D unwrapped cube to a given image, with a given colormap
-    void draw(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap = mDefaultColorMap);
+    const std::vector<Face2D*> mFaces = {&front, &back, &left, &right, &top, &bottom};
 
 private:
     // Initialize the lengths of the margins, the canvas size for a single face
@@ -96,9 +107,7 @@ private:
     void generateFacePositions();
     // Draw the cube's faces
     void drawFaces(cv::Mat &image, const std::map<CellColor, cv::Scalar> &colorMap);
-public:
-    // assigns a 3-component (BGR) cv color to the default color enum
-    static std::map<CellColor , cv::Scalar> mDefaultColorMap;
+    void updateCube();
 };
 
 #endif //RUBIC_SOLVER_CUBEDRAWER2D_H
