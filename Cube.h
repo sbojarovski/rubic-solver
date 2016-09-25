@@ -47,7 +47,7 @@ class Cube
 {
 public:
     class CubeFace;
-    typedef void(Cube::*transformPtr)();
+    typedef void(Cube::*transformPtr)();    //pointer-to-member-function of type void f()
 private:
     // TODO: do these have to be pointers?
     CubeFace * front;
@@ -96,6 +96,7 @@ public:
     // Get a random transformation of the cube's faces
     static const CubeTransforms getRandomTransform();
     static const std::vector<CubeTransforms > getRandomTransformVec(const int & n = 1);
+    static const std::string getTransformString(const CubeTransforms & t);
 
     // Solve the cube
     void solve();

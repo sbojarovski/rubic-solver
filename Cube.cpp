@@ -271,3 +271,21 @@ const std::vector<CellColor> Cube::getState() const {
     }
     return state;
 }
+
+const std::string Cube::getTransformString(const CubeTransforms &t) {
+    assert (t >=0 && t <= 12);
+    switch (t) {
+        case FRONT_CW   : return "FRONT_CW";
+        case FRONT_CCW  : return "FRONT_CCW";
+        case BACK_CW    : return "BACK_CW";
+        case BACK_CCW   : return "BACK_CCW";
+        case LEFT_CW    : return "LEFT_CW";
+        case LEFT_CCW   : return "LEFT_CCW";
+        case RIGHT_CW   : return "RIGHT_CW";
+        case RIGHT_CCW  : return "RIGHT_CCW";
+        case TOP_CW     : return "TOP_CW";
+        case TOP_CCW    : return "TOP_CCW";
+        case BOTTOM_CW  : return "BOTTOM_CW";
+        case BOTTOM_CCW : return "BOTTOM_CCW";
+    }
+}
